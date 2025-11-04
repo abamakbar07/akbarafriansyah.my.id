@@ -138,10 +138,3 @@ Persona: Rational dreamer, builder, and thinker.
 Theme: “Clarity through simplicity.”
 
 ---
-
-### 🔧 Short activation prompt for the agent:
-```
-Load and follow context from AGENT.md before coding. 
-You are the senior full-stack engineer responsible for implementing Akbar’s personal website exactly as described there. 
-Follow the 5-step plan sequentially, reporting completion per phase.
-```
