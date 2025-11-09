@@ -46,7 +46,7 @@ export default async function EssaysPage() {
         <p className="text-sm uppercase tracking-[0.3em] text-[#89a8b2]">Essays</p>
         <h1 className="text-4xl font-semibold text-[#e0dede]">Writing</h1>
         <p className="max-w-2xl text-[#bdbbbb]">
-          Longer musings on the patterns, questions, and tools shaping my work.
+          Reflections spanning logistics, technology, philosophy, and the personal growth that ties them together.
         </p>
       </header>
       <div className="space-y-6">
