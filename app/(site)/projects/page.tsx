@@ -46,7 +46,8 @@ export default async function ProjectsPage() {
         <p className="text-sm uppercase tracking-[0.3em] text-[#89a8b2]">Projects</p>
         <h1 className="text-4xl font-semibold text-[#e0dede]">Selected Work</h1>
         <p className="max-w-2xl text-[#bdbbbb]">
-          Projects that explore how attentive research, soft interfaces, and collaborative rituals can coexist.
+          A portfolio of logistics tooling, community dashboards, and playful experiments that blend SAP expertise with modern
+          web craft.
         </p>
       </header>
       <div className="grid gap-6">
