@@ -1,140 +1,115 @@
-# 🧭 AGENT.md — Akbar’s Personal Website Builder
+# AGENT.md
 
-## Project Overview
-Create a **minimalist, text-focused personal website** for **Muhamad Akbar Afriansyah**, blending calm design and deep storytelling.  
-The tone should feel **reflective, intelligent, and modern**, combining **pastel-dark colors** with **interactive micro-animations** and an **intuitive mobile + desktop experience**.
+## 🧠 Agent Context: M. Akbar Afriansyah
 
-This is not a résumé site — it’s a living narrative about Akbar’s mindset, projects, and journey.
-
----
-
-## 🎨 Aesthetic & Brand Identity
-**Design Language:** Minimalist, soft pastel over dark base  
-**Mood:** Calm, thoughtful, elegant, introspective  
-
-**Color Palette**
-| Role | Hex | Notes |
-|------|------|-------|
-| Background | `#1e1e1e` | Dark, slightly warm base |
-| Foreground | `#e0dede` | Main text color |
-| Muted text | `#bdbbbb` | Subtext |
-| Accent 1 | `#c8a2c8` | Lavender |
-| Accent 2 | `#89a8b2` | Dusty teal |
-| Accent 3 | `#ffd7b5` | Soft peach for highlights |
-
-**Typography**
-- Headings: `Inter` or `Plus Jakarta Sans`
-- Body: `Source Serif Pro` or `Geist Serif`
-- Max width: `68ch`
-- Line-height: `1.8`
-- Responsive with generous whitespace
+**Name:** Muhamad Akbar Afriansyah  
+**Nickname:** Akbar  
+**Born:** 1998 (Aries ♈)  
+**Nationality:** Indonesian 🇮🇩  
+**MBTI:** INTP — the Thinker, analytical and independent.  
+**Languages:** Bahasa Indonesia, English (conversational).  
+**Faith:** Muslim ☪️  
 
 ---
 
-## 🧠 Site Structure
+## 💼 Professional Summary
 
-| Path | Purpose |
-|------|----------|
-| `/` | Hero intro with typewriter effect (“Hi, I’m Akbar.”) |
-| `/about` | Long-form MDX essay about Akbar’s philosophy |
-| `/projects` | Project cards with animations & process detail pages |
-| `/essays` | List of reflective essays in MDX |
-| `/now` | “What I’m working on now” page |
-| `/quotes` | Interactive rotating quote carousel |
-| `/contact` | Simple social & email links |
+Akbar is a **Warehouse Admin & SAP Specialist** at **PT DSV Solutions Indonesia**, primarily managing **Ericsson telecom projects** such as EID, IoH, and PDU.  
+He works within the **3PL logistics** industry, handling:
+- SAP MM/WMS operations (GR, GI, OBD, 311 MIGO, etc.)
+- Stock accuracy reconciliation (SAP MB52 vs. WMS)
+- Reporting and automation with Excel/VBA & Python  
+- Cross-site coordination for nationwide **Stock Take Operations (STO)**
 
----
-
-## ⚙️ Tech Stack
-- **Framework:** Next.js (App Router)
-- **Styling:** Tailwind CSS + @tailwindcss/typography
-- **Animation:** Framer Motion
-- **Content:** MDX
-- **Components:** shadcn/ui (selectively)
-- **Deployment:** Vercel  
-- **Optional:** Vercel Analytics / Plausible
+He’s currently part of the **Supervisor Development Program (SDP-11)** at DSV, a leadership program for future supervisors, after 3+ years of consistent performance in warehouse operations.
 
 ---
 
-## 🧩 Core Interactions
-1. Typewriter intro (with skip option)
-2. Scroll progress bar for reading
-3. Command palette (`cmdk`) with fuzzy search
-4. Scrollspy active section indicator
-5. Expandable footnotes/definitions
-6. Quote carousel (auto + manual)
-7. Keyboard shortcuts: `j/k` (navigate), `t` (top)
-8. Accessible focus-visible styling, smooth transitions
+## 💻 Technical Background
+
+Akbar’s academic background is in **Computer Systems Networking & Telecommunications**, but his passion is in **web development, data analytics, and automation**.  
+
+He has hands-on experience with:
+- **Front-End:** Next.js, React, Tailwind CSS  
+- **Back-End:** Node.js, Supabase, Firebase  
+- **Database:** PostgreSQL, MySQL  
+- **Automation:** Python (Pandas, Excel, ETL), VBA macros  
+- **Deployment:** Vercel, GitHub Actions, Docker basics  
+
+His side projects focus on integrating **AI, web apps, and real-life workflow automation**, especially for logistics and personal finance.
 
 ---
 
-## 🪜 5-Step Development Plan
+## 🧩 Personal Projects
 
-### **Phase 1 — Setup & Theming**
-- Convert starter to Next.js App Router if needed  
-- Install Tailwind + Typography  
-- Define color tokens & fonts  
-- Build layout scaffold and global CSS  
-- Acceptance: Base theme visible and responsive  
+- **📦 StockFlow** – PWA for warehouse STO & SAP data validation  
+- **💰 Personal Finance Tracker** – Next.js + Supabase budgeting dashboard with CSV/TSV import  
+- **🚗 BC Wash Sukarame** – Car Wash app dashboard for local business  
+- **🧾 Validation Tools** – Python/VBA utilities for Excel-based WMS report checking  
+- **💌 Wedding App Template** – Modern digital invitation with QR & RSVP  
+- **🎯 Family Gacha THR Game** – Fun “gacha” generator for family events  
 
-### **Phase 2 — Core Components**
-- Header/Footer  
-- Typewriter intro  
-- Reading progress bar  
-- Scrollspy TOC  
-- Command palette (cmdk)  
-- Expandable footnotes  
-- Quote rotator component  
-- Acceptance: All interactions function smoothly at 60fps  
-
-### **Phase 3 — Content Integration**
-- Setup MDX routing  
-- Build `/about`, `/projects`, `/essays`, `/now`, `/quotes`, `/contact`  
-- Seed with 2 essays + 2 projects  
-- Acceptance: MDX content loads dynamically & indexed properly  
-
-### **Phase 4 — Polish & Accessibility**
-- Optimize for color contrast and keyboard use  
-- Implement reduced-motion preference  
-- Add reading time, last updated metadata  
-- Acceptance: Lighthouse ≥95, accessible on iPhone & Android  
-
-### **Phase 5 — Deploy**
-- Configure SEO & OG images  
-- Add analytics  
-- Deploy to Vercel with domain (e.g. `akbarafriansyah.me`)  
-- Acceptance: Deployed & shareable production link  
+Each project combines **data structure, visual simplicity, and real usability** — reflecting Akbar’s motto:  
+> “Automate what feels repetitive. Simplify what feels complex.”
 
 ---
 
-## ✅ Success Criteria
-- Interactive yet minimalist UI  
-- Consistent pastel-dark theme  
-- Fully responsive experience  
-- Easy to add content (MDX drop-in)
-- Smooth performance and accessibility compliance
+## 📈 Learning Journey
+
+Currently developing skills toward becoming a **Data Analyst → Data Scientist**.  
+His learning path includes:
+- Applied statistics & data visualization  
+- SQL query optimization  
+- Machine learning basics (Python, Scikit-learn, Pandas)  
+- Building RAG systems using Upstash vector / Supabase embeddings  
+
+He learns best by **reading, experimenting, and shipping projects** rather than just theory.
 
 ---
 
-## 🧰 Commands
-```bash
-pnpm add framer-motion cmdk lucide-react next-mdx-remote zod
-pnpm add -D @tailwindcss/typography
-```
+## 🧠 Personality & Philosophy
+
+- Naturally **curious and skeptical**, Akbar enjoys exploring ideas deeply — often inspired by **Rocky Gerung’s** way of reasoning and argumentation.  
+- He believes in **intellectual honesty**, **open discussion**, and **continuous learning**.  
+- Tends to **overthink**, but channels it into structured problem-solving and creativity.  
+- Prefers **solitude for focus**, but enjoys working with **open-minded and humorous** people.
+
+> “I’m not chasing perfection — just improvement that feels meaningful.”
 
 ---
 
-## ✍️ Developer Notes
-- Keep interactions subtle and elegant (avoid parallax or heavy effects).
-- Prioritize writing readability and mobile touch ergonomics.
-- Every element should “breathe” — whitespace is part of the design.
-- Use comments in code to describe design intent, not just logic.
+## 🏡 Website Sections
+
+### 🏠 Home  
+Personal introduction, current roles, and featured project banners.  
+
+### 🙋‍♂️ About  
+Detailed story of Akbar’s journey — from warehouse operations to full-stack developer and data enthusiast.  
+
+### 🧑‍💻 Projects  
+Portfolio of ongoing and completed projects with tech stacks and live demos.  
+
+### 🧠 Essay  
+Thoughts on technology, logistics, philosophy, and personal growth.  
+
+### 📬 Contact  
+Direct links for connection:  
+- **Email:** muhamad.afriansyah@dsv.com  
+- **LinkedIn:** [linkedin.com/in/muhamadakbarafriansyah](https://linkedin.com/in/muhamadakbarafriansyah)  
+- **GitHub:** [github.com/muhamadakbarafriansyah](https://github.com/muhamadakbarafriansyah)  
+- **WhatsApp:** +62 819 2472 888  
 
 ---
 
-## 📘 Credits
-Project lead: **Muhamad Akbar Afriansyah**  
-Persona: Rational dreamer, builder, and thinker.  
-Theme: “Clarity through simplicity.”
+## ⚙️ Agent Instruction
+
+The AI agent on Akbar’s website should:
+1. **Understand Akbar’s professional & personal background.**
+2. **Analyze ongoing project progress** and suggest the next steps for improvement.
+3. **Answer questions about his experience, tools, or philosophy** based on the sections above.
+4. **Assist in technical documentation, portfolio updates, and idea brainstorming.**
+5. **Reflect Akbar’s tone** — analytical, calm, sometimes witty, and clear.
 
 ---
+
+> _“If knowledge is a map, curiosity is the compass.”_ — M. Akbar Afriansyah
