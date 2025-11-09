@@ -4,7 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
 
-const navigationItems = [
+type NavigationItem = {
+  href: string
+  label: string
+}
+
+const navigationItems: NavigationItem[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
@@ -12,7 +17,7 @@ const navigationItems = [
   { href: '/contact', label: 'Contact' },
 ]
 
-export function Navigation() {
+export function Navigation(): JSX.Element {
   const pathname = usePathname()
   const shouldReduceMotion = useReducedMotion()
 

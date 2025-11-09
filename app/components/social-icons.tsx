@@ -2,9 +2,15 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, type LucideIcon } from 'lucide-react'
 
-const socials = [
+type SocialLink = {
+  href: string
+  label: string
+  icon: LucideIcon
+}
+
+const socials: SocialLink[] = [
   {
     href: 'https://github.com/akbarafriansyah',
     label: 'GitHub',
@@ -22,7 +28,11 @@ const socials = [
   },
 ]
 
-export function SocialIcons({ className = '' }) {
+type SocialIconsProps = {
+  className?: string
+}
+
+export function SocialIcons({ className = '' }: SocialIconsProps): JSX.Element {
   const shouldReduceMotion = useReducedMotion()
 
   return (

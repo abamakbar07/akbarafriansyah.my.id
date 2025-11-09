@@ -1,26 +1,42 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react'
 import { createPortal } from 'react-dom'
 import { usePathname, useRouter } from 'next/navigation'
-import { Command } from 'cmdk'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
+import { Command } from '@/vendor/cmdk'
 import { slugify } from '@/lib/slugify'
 
-const CommandPaletteContext = createContext(null)
+type CommandPaletteContextValue = {
+  open: boolean
+  openPalette: () => void
+  closePalette: () => void
+  togglePalette: () => void
+}
 
-const NAVIGATION_COMMANDS = [
-  { href: '/', label: 'Home', keywords: ['start', 'intro'] },
-  { href: '/about', label: 'About', keywords: ['biography', 'story'] },
-  { href: '/projects', label: 'Projects', keywords: ['work', 'builds'] },
-  { href: '/essays', label: 'Essays', keywords: ['writing', 'articles'] },
-  { href: '/now', label: 'Now', keywords: ['status', 'current'] },
-  { href: '/quotes', label: 'Quotes', keywords: ['inspiration'] },
-  { href: '/contact', label: 'Contact', keywords: ['reach', 'email'] },
-]
+type CommandPaletteProviderProps = {
+  children: ReactNode
+}
 
-function isEditableElement(target) {
+type DocumentHeading = {
+  id: string
+  element: HTMLElement
+  offset: number
+  title: string
+}
+
+const CommandPaletteContext = createContext<CommandPaletteContextValue | null>(null)
+
+function isEditableElement(target: EventTarget | null): target is HTMLElement {
   if (!(target instanceof HTMLElement)) return false
   const tag = target.tagName.toLowerCase()
   return (
@@ -32,9 +48,9 @@ function isEditableElement(target) {
   )
 }
 
-function getDocumentHeadings() {
+function getDocumentHeadings(): DocumentHeading[] {
   const headings = Array.from(
-    document.querySelectorAll('article[data-prose] h2, article[data-prose] h3')
+    document.querySelectorAll<HTMLElement>('article[data-prose] h2, article[data-prose] h3')
   )
   return headings.map((element) => {
     if (!element.id) {
@@ -49,7 +65,7 @@ function getDocumentHeadings() {
   })
 }
 
-export function CommandPaletteProvider({ children }) {
+export function CommandPaletteProvider({ children }: CommandPaletteProviderProps): JSX.Element {
   const router = useRouter()
   const pathname = usePathname()
   const shouldReduceMotion = useReducedMotion()
@@ -61,7 +77,7 @@ export function CommandPaletteProvider({ children }) {
     setMounted(true)
   }, [])
 
-  const announce = useCallback((message) => {
+  const announce = useCallback((message: string) => {
     setAnnouncement('')
     if (typeof requestAnimationFrame === 'function') {
       requestAnimationFrame(() => {
@@ -95,7 +111,7 @@ export function CommandPaletteProvider({ children }) {
   }, [pathname])
 
   const scrollToHeading = useCallback(
-    (direction) => {
+    (direction: 1 | -1) => {
       const headings = getDocumentHeadings()
       if (headings.length === 0) {
         announce('No sections available for navigation')
@@ -125,7 +141,7 @@ export function CommandPaletteProvider({ children }) {
   }, [announce, shouldReduceMotion])
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase()
       if (event.defaultPrevented) return
 
@@ -167,13 +183,13 @@ export function CommandPaletteProvider({ children }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [open, openPalette, closePalette, scrollToHeading, scrollToTop])
 
-  const value = useMemo(
+  const value = useMemo<CommandPaletteContextValue>(
     () => ({ open, openPalette, closePalette, togglePalette }),
     [open, openPalette, closePalette, togglePalette]
   )
 
   const handleCommandSelect = useCallback(
-    (href, label) => {
+    (href: string, label: string) => {
       announce(`Navigating to ${label}`)
       router.push(href)
     },
@@ -255,20 +271,31 @@ export function CommandPaletteProvider({ children }) {
   return (
     <CommandPaletteContext.Provider value={value}>
       {children}
-      {mounted && createPortal(
-        <>
-          {palette}
-          <span aria-live="polite" role="status" className="sr-only">
-            {announcement}
-          </span>
-        </>,
-        document.body
-      )}
+      {mounted &&
+        createPortal(
+          <>
+            {palette}
+            <span aria-live="polite" role="status" className="sr-only">
+              {announcement}
+            </span>
+          </>,
+          document.body
+        )}
     </CommandPaletteContext.Provider>
   )
 }
 
-export function useCommandPalette() {
+const NAVIGATION_COMMANDS = [
+  { href: '/', label: 'Home', keywords: ['start', 'intro'] },
+  { href: '/about', label: 'About', keywords: ['biography', 'story'] },
+  { href: '/projects', label: 'Projects', keywords: ['work', 'builds'] },
+  { href: '/essays', label: 'Essays', keywords: ['writing', 'articles'] },
+  { href: '/now', label: 'Now', keywords: ['status', 'current'] },
+  { href: '/quotes', label: 'Quotes', keywords: ['inspiration'] },
+  { href: '/contact', label: 'Contact', keywords: ['reach', 'email'] },
+]
+
+export function useCommandPalette(): CommandPaletteContextValue {
   const context = useContext(CommandPaletteContext)
   if (!context) {
     throw new Error('useCommandPalette must be used within CommandPaletteProvider')
@@ -276,7 +303,11 @@ export function useCommandPalette() {
   return context
 }
 
-export function CommandMenuTrigger({ className = '' }) {
+type CommandMenuTriggerProps = {
+  className?: string
+}
+
+export function CommandMenuTrigger({ className = '' }: CommandMenuTriggerProps): JSX.Element {
   const { openPalette } = useCommandPalette()
   return (
     <button

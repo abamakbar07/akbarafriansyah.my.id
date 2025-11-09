@@ -9,16 +9,90 @@ import {
   useMemo,
   useRef,
   useState,
+  type AriaRole,
+  type ChangeEvent,
+  type Dispatch,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type MutableRefObject,
+  type ReactNode,
+  type Ref,
+  type RefObject,
+  type SetStateAction,
 } from 'react'
 
-const CommandContext = createContext(null)
+type FilterKeywords = string | string[] | undefined
 
-function normalizeKeywords(keywords) {
+type CommandItemRegistration = {
+  value: string
+  ref: RefObject<HTMLDivElement>
+  onSelect?: (value: string) => void
+}
+
+type CommandContextValue = {
+  label?: string
+  query: string
+  setQuery: Dispatch<SetStateAction<string>>
+  listId: string
+  filter: (search: string, value: string, keywords?: FilterKeywords) => boolean
+  registerItem: (item: CommandItemRegistration) => void
+  unregisterItem: (value: string) => void
+  setItemVisibility: (value: string, visible: boolean) => void
+  activeValue: string | null
+  setActiveValue: Dispatch<SetStateAction<string | null>>
+  selectItem: (value: string) => void
+  visibleValues: string[]
+}
+
+type CommandRootProps = {
+  label?: string
+  loop?: boolean
+  filter?: (search: string, value: string, keywords?: FilterKeywords) => boolean
+  role?: AriaRole
+  onOpenChange?: (open: boolean) => void
+  onValueChange?: (value: string) => void
+  children: ReactNode
+} & Omit<HTMLAttributes<HTMLDivElement>, 'children'>
+
+type CommandInputProps = {
+  value?: string
+  onValueChange?: (value: string) => void
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
+
+type CommandListProps = HTMLAttributes<HTMLDivElement>
+
+type CommandEmptyProps = HTMLAttributes<HTMLDivElement>
+
+type CommandGroupProps = {
+  heading?: ReactNode
+  headingClassName?: string
+  children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
+type CommandItemProps = {
+  value: string
+  keywords?: FilterKeywords
+  onSelect?: (value: string) => void
+  children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
+type CommandDialogProps = {
+  open?: boolean
+  label?: string
+  onOpenChange?: (open: boolean) => void
+  children: ReactNode
+} & Omit<CommandRootProps, 'label' | 'children' | 'onOpenChange'>
+
+const CommandContext = createContext<CommandContextValue | null>(null)
+
+function normalizeKeywords(keywords: FilterKeywords): string[] {
   if (!keywords) return []
   return Array.isArray(keywords) ? keywords : [keywords]
 }
 
-function defaultFilter(search, value, keywords = []) {
+function defaultFilter(search: string, value: string, keywords: FilterKeywords = []): boolean {
   if (!search) return true
   const normalizedSearch = search.toLowerCase()
   const values = [value, ...normalizeKeywords(keywords)]
@@ -28,15 +102,15 @@ function defaultFilter(search, value, keywords = []) {
     .some((entry) => entry.includes(normalizedSearch))
 }
 
-function useMergedRefs(...refs) {
+function useMergedRefs<T>(...refs: Array<Ref<T>>): (node: T | null) => void {
   return useCallback(
-    (node) => {
+    (node: T | null) => {
       refs.forEach((ref) => {
         if (!ref) return
         if (typeof ref === 'function') {
           ref(node)
         } else {
-          ref.current = node
+          ;(ref as MutableRefObject<T | null>).current = node
         }
       })
     },
@@ -44,7 +118,7 @@ function useMergedRefs(...refs) {
   )
 }
 
-const CommandRoot = forwardRef(function CommandRoot(
+const CommandRoot = forwardRef<HTMLDivElement, CommandRootProps>(function CommandRoot(
   {
     label,
     children,
@@ -58,15 +132,15 @@ const CommandRoot = forwardRef(function CommandRoot(
   forwardedRef
 ) {
   const listId = useId()
-  const containerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const mergedRef = useMergedRefs(containerRef, forwardedRef)
   const [query, setQuery] = useState('')
-  const [activeValue, setActiveValue] = useState(null)
-  const itemsRef = useRef([])
-  const visibilityMapRef = useRef(new Map())
+  const [activeValue, setActiveValue] = useState<string | null>(null)
+  const itemsRef = useRef<CommandItemRegistration[]>([])
+  const visibilityMapRef = useRef<Map<string, boolean>>(new Map())
   const [renderVersion, setRenderVersion] = useState(0)
 
-  const registerItem = useCallback((item) => {
+  const registerItem = useCallback((item: CommandItemRegistration) => {
     itemsRef.current = itemsRef.current.filter((entry) => entry.value !== item.value)
     itemsRef.current.push(item)
     visibilityMapRef.current.set(item.value, true)
@@ -74,13 +148,13 @@ const CommandRoot = forwardRef(function CommandRoot(
     setRenderVersion((value) => value + 1)
   }, [])
 
-  const unregisterItem = useCallback((value) => {
+  const unregisterItem = useCallback((value: string) => {
     itemsRef.current = itemsRef.current.filter((entry) => entry.value !== value)
     visibilityMapRef.current.delete(value)
     setRenderVersion((state) => state + 1)
   }, [])
 
-  const setItemVisibility = useCallback((value, visible) => {
+  const setItemVisibility = useCallback((value: string, visible: boolean) => {
     const previous = visibilityMapRef.current.get(value)
     if (previous === visible) return
     visibilityMapRef.current.set(value, visible)
@@ -103,7 +177,7 @@ const CommandRoot = forwardRef(function CommandRoot(
   }, [visibleItems, activeValue])
 
   const selectItem = useCallback(
-    (value) => {
+    (value: string) => {
       const item = itemsRef.current.find((entry) => entry.value === value)
       if (!item) return
       item.onSelect?.(value)
@@ -114,7 +188,7 @@ const CommandRoot = forwardRef(function CommandRoot(
   )
 
   const moveActive = useCallback(
-    (direction) => {
+    (direction: number) => {
       if (visibleItems.length === 0) return
       const currentIndex = visibleItems.findIndex((item) => item.value === activeValue)
       let nextIndex = currentIndex + direction
@@ -134,7 +208,7 @@ const CommandRoot = forwardRef(function CommandRoot(
   )
 
   const handleKeyDown = useCallback(
-    (event) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       switch (event.key) {
         case 'ArrowDown': {
           event.preventDefault()
@@ -164,7 +238,7 @@ const CommandRoot = forwardRef(function CommandRoot(
     [moveActive, activeValue, selectItem, onOpenChange]
   )
 
-  const contextValue = useMemo(
+  const contextValue = useMemo<CommandContextValue>(
     () => ({
       label,
       query,
@@ -210,7 +284,7 @@ const CommandRoot = forwardRef(function CommandRoot(
 
 CommandRoot.displayName = 'CommandRoot'
 
-const CommandInput = forwardRef(function CommandInput(
+const CommandInput = forwardRef<HTMLInputElement, CommandInputProps>(function CommandInput(
   { value, onValueChange, ...props },
   forwardedRef
 ) {
@@ -222,7 +296,7 @@ const CommandInput = forwardRef(function CommandInput(
   const { query, setQuery, listId } = context
 
   const handleChange = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const next = event.target.value
       setQuery(next)
       onValueChange?.(next)
@@ -246,7 +320,7 @@ const CommandInput = forwardRef(function CommandInput(
 
 CommandInput.displayName = 'CommandInput'
 
-function CommandList({ children, ...props }) {
+function CommandList({ children, ...props }: CommandListProps): JSX.Element {
   const context = useContext(CommandContext)
   if (!context) {
     throw new Error('Command.List must be used within a Command component')
@@ -259,7 +333,7 @@ function CommandList({ children, ...props }) {
   )
 }
 
-function CommandEmpty(props) {
+function CommandEmpty(props: CommandEmptyProps): JSX.Element | null {
   const context = useContext(CommandContext)
   if (!context) {
     throw new Error('Command.Empty must be used within a Command component')
@@ -272,7 +346,7 @@ function CommandEmpty(props) {
   return <div {...props} />
 }
 
-function CommandGroup({ heading, headingClassName = '', className, children, ...props }) {
+function CommandGroup({ heading, headingClassName = '', className, children, ...props }: CommandGroupProps): JSX.Element {
   return (
     <div role="group" aria-label={typeof heading === 'string' ? heading : undefined} className={className} {...props}>
       {heading ? (
@@ -285,7 +359,7 @@ function CommandGroup({ heading, headingClassName = '', className, children, ...
   )
 }
 
-const CommandItem = forwardRef(function CommandItem(
+const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(function CommandItem(
   { value, keywords, onSelect, children, ...props },
   forwardedRef
 ) {
@@ -295,7 +369,7 @@ const CommandItem = forwardRef(function CommandItem(
   }
   const { query, filter, registerItem, unregisterItem, setItemVisibility, activeValue, setActiveValue, selectItem } = context
 
-  const itemRef = useRef(null)
+  const itemRef = useRef<HTMLDivElement | null>(null)
   const mergedRef = useMergedRefs(itemRef, forwardedRef)
   const isVisible = filter(query.trim(), value, keywords)
   const isActive = activeValue === value
@@ -314,7 +388,7 @@ const CommandItem = forwardRef(function CommandItem(
   }, [setActiveValue, value])
 
   const handleClick = useCallback(
-    (event) => {
+    (event: MouseEvent<HTMLDivElement>) => {
       event.preventDefault()
       selectItem(value)
     },
@@ -341,11 +415,11 @@ const CommandItem = forwardRef(function CommandItem(
 
 CommandItem.displayName = 'CommandItem'
 
-function CommandSeparator(props) {
+function CommandSeparator(props: HTMLAttributes<HTMLDivElement>): JSX.Element {
   return <div role="separator" {...props} />
 }
 
-const CommandDialog = forwardRef(function CommandDialog(
+const CommandDialog = forwardRef<HTMLDivElement, CommandDialogProps>(function CommandDialog(
   { open = true, onOpenChange, label, children, ...props },
   forwardedRef
 ) {
@@ -366,6 +440,16 @@ const CommandDialog = forwardRef(function CommandDialog(
 
 CommandDialog.displayName = 'CommandDialog'
 
+type CommandComponent = typeof CommandRoot & {
+  Input: typeof CommandInput
+  List: typeof CommandList
+  Empty: typeof CommandEmpty
+  Group: typeof CommandGroup
+  Item: typeof CommandItem
+  Separator: typeof CommandSeparator
+  Dialog: typeof CommandDialog
+}
+
 export const Command = Object.assign(CommandRoot, {
   Input: CommandInput,
   List: CommandList,
@@ -374,6 +458,6 @@ export const Command = Object.assign(CommandRoot, {
   Item: CommandItem,
   Separator: CommandSeparator,
   Dialog: CommandDialog,
-})
+}) as CommandComponent
 
 export default Command

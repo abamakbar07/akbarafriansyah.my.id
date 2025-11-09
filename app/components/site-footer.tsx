@@ -6,7 +6,7 @@ import { Container } from './container'
 import { FooterLinks } from './footer-links'
 import { SocialIcons } from './social-icons'
 
-export function SiteFooter() {
+export function SiteFooter(): JSX.Element {
   const shouldReduceMotion = useReducedMotion()
 
   return (
