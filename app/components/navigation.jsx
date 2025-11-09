@@ -36,7 +36,8 @@ export function Navigation() {
             >
               <Link
                 href={item.href}
-                className={`transition-colors duration-200 ease-out hover:text-foreground ${
+                aria-current={isActive ? 'page' : undefined}
+                className={`rounded-md px-1 transition-colors duration-200 ease-out hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-lavender focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   isActive ? 'text-foreground' : 'text-muted'
                 }`}
               >

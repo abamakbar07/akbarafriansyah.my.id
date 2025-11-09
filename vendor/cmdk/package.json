@@ -1,0 +1,7 @@
+{
+  "name": "cmdk",
+  "version": "0.0.0",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module"
+}

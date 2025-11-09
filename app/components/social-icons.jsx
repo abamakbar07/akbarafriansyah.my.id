@@ -40,7 +40,7 @@ export function SocialIcons({ className = '' }) {
             <Link
               href={social.href}
               aria-label={social.label}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-muted/40 text-muted transition-colors duration-200 hover:border-accent-lavender hover:text-foreground"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-muted/40 text-muted transition-colors duration-200 hover:border-accent-lavender hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-peach focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Icon className="h-5 w-5" strokeWidth={1.5} />
             </Link>

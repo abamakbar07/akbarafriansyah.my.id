@@ -10,7 +10,7 @@ type MetadataBadgesProps = {
 
 function Badge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-[#2f2f2f] bg-[#1c1c1c] px-3 py-1 text-xs font-medium uppercase tracking-wide text-[#bdbbbb]">
+    <span className="inline-flex items-center rounded-full border border-white/10 bg-[#1c1c1c] px-3 py-1 text-xs font-medium uppercase tracking-wide text-muted">
       {children}
     </span>
   );

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { slugify } from '@/lib/slugify';
+
 type Heading = {
   id: string;
   title: string;
@@ -11,14 +13,6 @@ type Heading = {
 type ScrollSpyProps = {
   containerSelector?: string;
 };
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/[\s_-]+/g, '-');
-}
 
 export function ScrollSpy({ containerSelector = 'article[data-prose]' }: ScrollSpyProps) {
   const [headings, setHeadings] = useState<Heading[]>([]);
@@ -35,7 +29,7 @@ export function ScrollSpy({ containerSelector = 'article[data-prose]' }: ScrollS
       }
       return {
         id: element.id,
-        title: element.textContent ?? '',
+        title: (element.textContent ?? '').trim(),
         level: Number(element.tagName.replace('H', '')),
       };
     });
@@ -64,15 +58,21 @@ export function ScrollSpy({ containerSelector = 'article[data-prose]' }: ScrollS
   if (headings.length === 0) return null;
 
   return (
-    <nav aria-label="Section navigation" className="sticky top-24 rounded-xl border border-[#2f2f2f] bg-[#161616] p-4 text-sm text-[#bdbbbb]">
-      <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[#777]">On this page</p>
+    <nav
+      aria-label="Section navigation"
+      className="sticky top-24 rounded-xl border border-[#363636] bg-[#1a1a1a]/95 p-4 text-sm text-[#d0cdcd] shadow-[0_20px_45px_-30px_rgba(0,0,0,0.7)]"
+    >
+      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#8f8f8f]">On this page</p>
       <ul className="space-y-2">
         {headings.map((heading) => (
           <li key={heading.id} className={heading.level === 3 ? 'ml-3' : ''}>
             <a
               href={`#${heading.id}`}
-              className={`block rounded-md px-2 py-1 transition-colors ${
-                active === heading.id ? 'bg-[#232323] text-[#e0dede]' : 'hover:bg-[#1f1f1f] hover:text-[#e0dede]'
+              aria-current={active === heading.id ? 'true' : undefined}
+              className={`block rounded-md px-2 py-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-peach focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a] ${
+                active === heading.id
+                  ? 'bg-[#262626] text-[#f0efef]'
+                  : 'text-[#d0cdcd] hover:bg-[#202020] hover:text-[#f0efef]'
               }`}
             >
               {heading.title}

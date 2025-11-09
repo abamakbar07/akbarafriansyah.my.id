@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      cmdk:
+        specifier: file:vendor/cmdk
+        version: file:vendor/cmdk
       framer-motion:
         specifier: ^11.0.5
         version: 11.18.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -477,6 +480,9 @@ packages:
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
+
+  cmdk@file:vendor/cmdk:
+    resolution: {directory: vendor/cmdk, type: directory}
 
   gray-matter@file:vendor/gray-matter:
     resolution: {directory: vendor/gray-matter, type: directory}
@@ -1191,6 +1197,8 @@ snapshots:
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
+
+  cmdk@file:vendor/cmdk: {}
 
   gray-matter@file:vendor/gray-matter: {}
 
