@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "framer-motion": "^11.0.5",
+    "gray-matter": "file:vendor/gray-matter",
     "lucide-react": "^0.360.0",
     "next": "latest",
+    "next-mdx-remote": "file:vendor/next-mdx-remote",
     "react": "latest",
     "react-dom": "latest"
   },
