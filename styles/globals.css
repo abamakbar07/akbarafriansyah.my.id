@@ -1,11 +1,40 @@
-html, body {
-  padding: 0;
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  background: #fff;
-  color: #111827;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --color-background: #1e1e1e;
+  --color-foreground: #e0dede;
+  --color-muted: #bdbbbb;
+  --color-accent-1: #c8a2c8;
+  --color-accent-2: #89a8b2;
+  --color-accent-3: #ffd7b5;
+
+  --font-sans: var(--font-plus), var(--font-inter), "Inter", "Plus Jakarta Sans", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), "Source Serif Pro", "Geist Serif", ui-serif, Georgia, serif;
+
+  --measure-narrative: 68ch;
+  --leading-narrative: 1.8;
 }
 
-a { color: inherit; text-decoration: none; }
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
 
-* { box-sizing: border-box; }
+@layer base {
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+  }
+
+  p {
+    line-height: var(--leading-narrative);
+  }
+
+  a {
+    @apply transition-colors duration-200 ease-out text-accent-lavender hover:text-accent-peach;
+  }
+}
