@@ -3,7 +3,6 @@ import '../styles/globals.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { Inter, Plus_Jakarta_Sans, Source_Serif_4 } from 'next/font/google'
 
 import { siteConfig } from '@/lib/site'
 
@@ -11,24 +10,6 @@ import { Container } from './components/container'
 import { CommandPaletteProvider } from './components/command-palette'
 import { SiteFooter } from './components/site-footer'
 import { SiteHeader } from './components/site-header'
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-plus',
-})
-
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-source-serif',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -78,10 +59,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${inter.variable} ${sourceSerif.variable}`}
-    >
+    <html lang="en">
       <body className="bg-background text-foreground antialiased font-sans">
         <CommandPaletteProvider>
           <div className="relative flex min-h-screen flex-col">

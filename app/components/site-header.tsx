@@ -7,7 +7,7 @@ import { Container } from './container'
 import { CommandMenuTrigger } from './command-palette'
 import { Navigation } from './navigation'
 
-export function SiteHeader() {
+export function SiteHeader(): JSX.Element {
   const shouldReduceMotion = useReducedMotion()
 
   return (

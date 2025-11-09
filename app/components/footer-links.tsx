@@ -3,7 +3,17 @@
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 
-const linkGroups = [
+type FooterLink = {
+  href: string
+  label: string
+}
+
+type FooterLinkGroup = {
+  title: string
+  links: FooterLink[]
+}
+
+const linkGroups: FooterLinkGroup[] = [
   {
     title: 'Explore',
     links: [
@@ -28,7 +38,7 @@ const linkGroups = [
   },
 ]
 
-export function FooterLinks() {
+export function FooterLinks(): JSX.Element {
   const shouldReduceMotion = useReducedMotion()
 
   return (

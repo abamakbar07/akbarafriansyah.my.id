@@ -1,6 +1,6 @@
 import TypewriterIntro from './(site)/components/typewriter-intro'
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <section className="space-y-12">
       <TypewriterIntro />
