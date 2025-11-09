@@ -81,8 +81,8 @@ function useTypewriter({ phrases, typingSpeed, pauseBetween }: UseTypewriterOpti
 }
 
 const DEFAULT_PHRASES = [
-  'Hi, I\'m Akbar — a rational dreamer crafting thoughtful web experiences.',
-  'I write, design, and build serene digital spaces for curious minds.',
+  "Hi, I'm Akbar — a Warehouse Admin & SAP Specialist keeping Ericsson's logistics flowing.",
+  'I design calm digital systems where SAP, web apps, and automation work together.',
 ]
 
 export default function TypewriterIntro({
