@@ -33,7 +33,7 @@ const linkGroups: FooterLinkGroup[] = [
     title: 'Connect',
     links: [
       { href: '/contact', label: 'Contact' },
-      { href: 'mailto:hello@akbarafriansyah.my.id', label: 'Email' },
+      { href: 'mailto:hai@akbarafriansyah.my.id', label: 'Email' },
     ],
   },
 ]

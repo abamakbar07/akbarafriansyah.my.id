@@ -7,7 +7,7 @@ export default function Home(): JSX.Element {
       <div className="space-y-6 text-base text-muted">
         <p className="max-w-narrative font-serif text-lg leading-narrative text-foreground">
           I’m Muhamad Akbar Afriansyah—Warehouse Admin & SAP Specialist at PT DSV Solutions Indonesia—currently steering
-          Ericsson projects like EID, IoH, and PDU across the 3PL landscape. My daily craft spans SAP MM/WMS transactions,
+          Ericsson projects at PDU across the 3PL landscape. My daily craft spans SAP MM/WMS transactions,
           stock reconciliation rituals, and keeping nationwide Stock Take Operations serene for every site involved.
         </p>
         <p className="max-w-narrative font-serif">
