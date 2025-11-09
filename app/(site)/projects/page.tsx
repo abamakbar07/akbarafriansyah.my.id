@@ -1,10 +1,40 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
 import { MetadataBadges } from '../components/metadata-badges';
 import { getCollection } from '@/lib/mdx';
+import { getAbsoluteUrl, siteConfig } from '@/lib/site';
 
-export const metadata = {
-  title: 'Projects — Akbar Afriansyah',
-  description: 'Case studies and process notes from ongoing experiments.',
+const pageTitle = 'Projects — Akbar Afriansyah';
+const pageDescription = 'Case studies and process notes from ongoing experiments.';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
+  alternates: {
+    canonical: getAbsoluteUrl('/projects'),
+  },
+  openGraph: {
+    url: getAbsoluteUrl('/projects'),
+    siteName: siteConfig.author,
+    title: pageTitle,
+    description: pageDescription,
+    images: [
+      {
+        url: getAbsoluteUrl('/api/og?title=Projects&type=Collection'),
+        width: 1200,
+        height: 630,
+        alt: pageTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    creator: siteConfig.twitter,
+    images: [getAbsoluteUrl('/api/og?title=Projects&type=Collection')],
+  },
 };
 
 export default async function ProjectsPage() {

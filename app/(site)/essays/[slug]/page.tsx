@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { MetadataBadges } from '../../components/metadata-badges';
 import { LongformLayout } from '../../components/longform-layout';
 import { getAllSlugs, getEntry } from '@/lib/mdx';
+import { getAbsoluteUrl, siteConfig } from '@/lib/site';
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs('essays');
@@ -12,11 +13,48 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const entry = await getEntry('essays', params.slug);
   if (!entry) {
-    return { title: 'Essay not found' };
+    return {
+      title: 'Essay not found',
+      description: 'The essay you were looking for could not be located.',
+    };
   }
+  const url = getAbsoluteUrl(`/essays/${entry.meta.slug}`);
+  const ogImage = getAbsoluteUrl(
+    `/api/og?title=${encodeURIComponent(entry.meta.title)}&type=${encodeURIComponent('Essay')}`
+  );
+  const description = entry.meta.summary ?? siteConfig.description;
   return {
     title: `${entry.meta.title} — Essays`,
-    description: entry.meta.summary,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: 'article',
+      url,
+      siteName: siteConfig.author,
+      title: entry.meta.title,
+      description,
+      publishedTime: entry.meta.publishedAt,
+      modifiedTime: entry.meta.updatedAt ?? entry.meta.publishedAt,
+      authors: [siteConfig.author],
+      tags: entry.meta.tags,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: entry.meta.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: entry.meta.title,
+      description,
+      creator: siteConfig.twitter,
+      images: [ogImage],
+    },
   };
 }
 

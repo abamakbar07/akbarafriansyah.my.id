@@ -1,10 +1,40 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
 import { MetadataBadges } from '../components/metadata-badges';
 import { getCollection } from '@/lib/mdx';
+import { getAbsoluteUrl, siteConfig } from '@/lib/site';
 
-export const metadata = {
-  title: 'Essays — Akbar Afriansyah',
-  description: 'Reflections on process, craft, and collaborative rituals.',
+const pageTitle = 'Essays — Akbar Afriansyah';
+const pageDescription = 'Reflections on process, craft, and collaborative rituals.';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
+  alternates: {
+    canonical: getAbsoluteUrl('/essays'),
+  },
+  openGraph: {
+    url: getAbsoluteUrl('/essays'),
+    siteName: siteConfig.author,
+    title: pageTitle,
+    description: pageDescription,
+    images: [
+      {
+        url: getAbsoluteUrl('/api/og?title=Essays&type=Collection'),
+        width: 1200,
+        height: 630,
+        alt: pageTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    creator: siteConfig.twitter,
+    images: [getAbsoluteUrl('/api/og?title=Essays&type=Collection')],
+  },
 };
 
 export default async function EssaysPage() {
