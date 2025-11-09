@@ -47,7 +47,10 @@ export function FooterLinks() {
           <ul className="space-y-2">
             {group.links.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-foreground">
+                <Link
+                  href={link.href}
+                  className="rounded-md px-1 transition-colors hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-peach focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
                   {link.label}
                 </Link>
               </li>
