@@ -11,12 +11,18 @@ importers:
       framer-motion:
         specifier: ^11.0.5
         version: 11.18.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      gray-matter:
+        specifier: file:vendor/gray-matter
+        version: file:vendor/gray-matter
       lucide-react:
         specifier: ^0.360.0
         version: 0.360.0(react@19.2.0)
       next:
         specifier: latest
         version: 16.0.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      next-mdx-remote:
+        specifier: file:vendor/next-mdx-remote
+        version: file:vendor/next-mdx-remote
       react:
         specifier: latest
         version: 19.2.0
@@ -472,6 +478,9 @@ packages:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
 
+  gray-matter@file:vendor/gray-matter:
+    resolution: {directory: vendor/gray-matter, type: directory}
+
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
@@ -554,6 +563,9 @@ packages:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  next-mdx-remote@file:vendor/next-mdx-remote:
+    resolution: {directory: vendor/next-mdx-remote, type: directory}
 
   next@16.0.1:
     resolution: {integrity: sha512-e9RLSssZwd35p7/vOa+hoDFggUZIUbZhIUSLZuETCwrCVvxOs87NamoUzT+vbcNAL8Ld9GobBnWOA6SbV/arOw==}
@@ -1180,6 +1192,8 @@ snapshots:
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
 
+  gray-matter@file:vendor/gray-matter: {}
+
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
@@ -1248,6 +1262,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.11: {}
+
+  next-mdx-remote@file:vendor/next-mdx-remote: {}
 
   next@16.0.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
