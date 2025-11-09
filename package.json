@@ -1,21 +1,27 @@
 {
-	"name": "akbarafriansyah.my.id",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start"
-	},
-        "dependencies": {
-                "next": "latest",
-                "react": "latest",
-                "react-dom": "latest"
-        },
-        "devDependencies": {
-                "@tailwindcss/typography": "^0.5.13",
-                "autoprefixer": "^10.4.19",
-                "postcss": "^8.4.38",
-                "tailwindcss": "^3.4.14"
-        }
+  "name": "akbarafriansyah.my.id",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "framer-motion": "^11.0.5",
+    "lucide-react": "^0.360.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.3.3"
+  }
 }
