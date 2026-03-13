@@ -1,6 +1,10 @@
 import Link from 'next/link'
 
-const identityTags = ['SAP MM/WMS', 'Warehouse Ops', 'Automation', 'Next.js', 'Python', 'Data Analytics']
+import type { Profile } from '@/lib/profile'
+
+type VirtualIdCardProps = {
+  profile: Profile
+}
 
 const cardLinks = [
   {
@@ -20,21 +24,25 @@ const cardLinks = [
   },
 ]
 
-export default function VirtualIdCard(): JSX.Element {
+export default function VirtualIdCard({ profile }: VirtualIdCardProps): JSX.Element {
+  const identityTags = profile.highlights.length > 0 ? profile.highlights : ['SAP MM/WMS', 'Warehouse Ops', 'Automation']
+
   return (
     <article className="w-full rounded-2xl border border-muted/40 bg-background/60 p-5 shadow-sm shadow-black/20 backdrop-blur sm:p-6 md:p-8">
       <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-start">
         <header className="space-y-3">
           <p className="text-xs uppercase tracking-[0.3em] text-accent-teal">Virtual Identity Card</p>
-          <h1 className="font-display text-3xl text-foreground sm:text-4xl">Muhamad Akbar Afriansyah</h1>
+          <h1 className="font-display text-3xl text-foreground sm:text-4xl">{profile.name}</h1>
           <dl className="space-y-2 text-sm text-muted sm:text-base">
             <div>
               <dt className="sr-only">Role</dt>
-              <dd>Warehouse Admin &amp; SAP Specialist · PT DSV Solutions Indonesia</dd>
+              <dd>
+                {profile.headline} · {profile.company}
+              </dd>
             </div>
             <div>
               <dt className="sr-only">Location</dt>
-              <dd>Pekanbaru, Indonesia · Ericsson PDU Program</dd>
+              <dd>{profile.location}</dd>
             </div>
           </dl>
         </header>
@@ -43,10 +51,7 @@ export default function VirtualIdCard(): JSX.Element {
           <h2 id="identity-card-summary" className="text-sm uppercase tracking-[0.2em] text-muted">
             Summary
           </h2>
-          <p className="font-serif text-base leading-relaxed text-foreground">
-            I bridge logistics operations and software craft: reconciling stock with SAP precision, leading calm cross-site
-            workflows, and building practical tools with Next.js, Python, and data-first thinking.
-          </p>
+          <p className="font-serif text-base leading-relaxed text-foreground">{profile.bioShort}</p>
           <ul className="flex flex-wrap gap-2" aria-label="Core expertise tags">
             {identityTags.map((tag) => (
               <li

@@ -19,6 +19,31 @@ The application reads a single environment variable that should be configured in
 
 > Tip: when running locally you can set `NEXT_PUBLIC_SITE_URL=http://localhost:3000` to preview fully-qualified URLs in metadata.
 
+## Profile API endpoint
+
+The app exposes `GET /api/profile` as the single profile data endpoint used by server-rendered UI and external consumers.
+
+### Response shape
+
+The endpoint returns JSON from `content/profile.json` (with safe defaults when file content is missing or invalid):
+
+- `name` (`string`) — full name shown on the Virtual ID Card title.
+- `headline` (`string`) — role text shown in the role/company row.
+- `company` (`string`) — company text paired with the headline.
+- `location` (`string`) — location row on the Virtual ID Card.
+- `bioShort` (`string`) — summary paragraph content.
+- `tagline` (`string`) — highlighted motto on the home page.
+- `socials` (`{ label: string; href: string; icon?: string }[]`) — contact/social links.
+- `highlights` (`string[]`) — expertise tags used by the Virtual ID Card.
+- `stats` (`{ label: string; value: string }[]`, optional) — optional profile statistics.
+
+### Optional cache-control
+
+`GET /api/profile` supports optional cache-control tuning through query parameters:
+
+- `?cache=no-store` → sets `Cache-Control: no-store`
+- `?cache=public&maxAge=300` → sets a public cache header with `max-age`, `s-maxage`, and `stale-while-revalidate`
+
 ## Production build
 
 ```bash
