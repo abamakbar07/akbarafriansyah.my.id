@@ -1,6 +1,7 @@
 import { getProfile } from '@/lib/profile'
 
 import TypewriterIntro from './(site)/components/typewriter-intro'
+import VirtualIdCard from './(site)/components/virtual-id-card'
 
 export default async function Home(): Promise<JSX.Element> {
   const profile = await getProfile()
@@ -14,6 +15,7 @@ export default async function Home(): Promise<JSX.Element> {
 
   return (
     <section className="space-y-12">
+      <VirtualIdCard />
       <TypewriterIntro />
       <div className="space-y-6 text-base text-muted">
         <p className="max-w-narrative font-serif text-lg leading-narrative text-foreground">
