@@ -7,10 +7,7 @@ import Script from 'next/script'
 import { getProfile } from '@/lib/profile'
 import { siteConfig } from '@/lib/site'
 
-import { Container } from './components/container'
 import { CommandPaletteProvider } from './components/command-palette'
-import { SiteFooter } from './components/site-footer'
-import { SiteHeader } from './components/site-header'
 
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await getProfile()
@@ -56,21 +53,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const profile = await getProfile()
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-background text-foreground antialiased font-sans">
-        <CommandPaletteProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
-            <main className="flex-1 py-16">
-              <Container className="flex flex-1 flex-col gap-16">{children}</Container>
-            </main>
-            <SiteFooter profile={profile} />
-          </div>
-        </CommandPaletteProvider>
+      <body className="bg-background font-sans text-foreground antialiased">
+        <CommandPaletteProvider>{children}</CommandPaletteProvider>
         <Script id="plausible-loader" strategy="lazyOnload">
           {`
             if (typeof navigator === 'undefined' || navigator.doNotTrack !== '1') {

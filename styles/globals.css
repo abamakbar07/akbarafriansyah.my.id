@@ -44,3 +44,28 @@ html {
     @apply transition-colors duration-200 ease-out text-accent-lavender hover:text-accent-peach;
   }
 }
+
+.virtual-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.virtual-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.virtual-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.virtual-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.virtual-card-scene {
+  perspective: 1200px;
+}
