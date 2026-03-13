@@ -12,10 +12,10 @@
     "gray-matter": "file:vendor/gray-matter",
     "lucide-react": "^0.360.0",
     "cmdk": "file:vendor/cmdk",
-    "next": "15.5.8",
+    "next": "^16.0.0",
     "next-mdx-remote": "file:vendor/next-mdx-remote",
-    "react": "latest",
-    "react-dom": "latest"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
@@ -26,5 +26,6 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "pnpm@10.13.1"
 }
