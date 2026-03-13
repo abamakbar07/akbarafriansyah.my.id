@@ -1,0 +1,40 @@
+{
+  "name": "Muhamad Akbar Afriansyah",
+  "headline": "Warehouse Admin & SAP Specialist",
+  "company": "PT DSV Solutions Indonesia",
+  "location": "Jakarta, Indonesia",
+  "bioShort": "I build calm logistics workflows with SAP discipline, automation, and clear documentation.",
+  "tagline": "Automate what feels repetitive. Simplify what feels complex.",
+  "socials": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/abamakbar07",
+      "icon": "github"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/akbarafriansyah",
+      "icon": "linkedin"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:hai@akbarafriansyah.my.id",
+      "icon": "mail"
+    }
+  ],
+  "highlights": [
+    "Supervisor Development Program cohort 11",
+    "Ericsson telecom operations",
+    "SAP MM/WMS + Python/VBA automation"
+  ],
+  "stats": [
+    {
+      "label": "Experience",
+      "value": "3+ years in 3PL logistics"
+    },
+    {
+      "label": "Focus",
+      "value": "Data Analyst → Data Scientist"
+    }
+  ]
+}
