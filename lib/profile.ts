@@ -76,7 +76,10 @@ function asStats(value: unknown): ProfileStat[] | undefined {
 }
 
 function normalizeProfile(value: unknown): Profile {
-  if (!isRecord(value)) return DEFAULT_PROFILE
+  if (!isRecord(value)) {
+    console.warn('[profile] Expected profile JSON to be an object. Falling back to defaults.')
+    return DEFAULT_PROFILE
+  }
 
   return {
     name: asString(value.name, DEFAULT_PROFILE.name),
@@ -91,13 +94,23 @@ function normalizeProfile(value: unknown): Profile {
   }
 }
 
+function parseProfileJson(source: string): unknown {
+  try {
+    return JSON.parse(source)
+  } catch (error) {
+    console.warn('[profile] Invalid JSON in content/profile.json. Falling back to defaults.', error)
+    return DEFAULT_PROFILE
+  }
+}
+
 export async function getProfile(): Promise<Profile> {
   const filePath = path.join(process.cwd(), 'content', 'profile.json')
 
   try {
     const source = await readFile(filePath, 'utf8')
-    return normalizeProfile(JSON.parse(source))
-  } catch {
+    return normalizeProfile(parseProfileJson(source))
+  } catch (error) {
+    console.warn('[profile] Unable to read content/profile.json. Falling back to defaults.', error)
     return DEFAULT_PROFILE
   }
 }

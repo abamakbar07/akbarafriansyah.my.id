@@ -15,7 +15,7 @@ export default async function Home(): Promise<JSX.Element> {
 
   return (
     <section className="space-y-12">
-      <VirtualIdCard />
+      <VirtualIdCard profile={profile} />
       <TypewriterIntro />
       <div className="space-y-6 text-base text-muted">
         <p className="max-w-narrative font-serif text-lg leading-narrative text-foreground">
