@@ -8,14 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "cmdk": "file:vendor/cmdk",
     "framer-motion": "^11.0.5",
     "gray-matter": "file:vendor/gray-matter",
     "lucide-react": "^0.360.0",
-    "cmdk": "file:vendor/cmdk",
-    "next": "^16.0.0",
+    "next": "^16.1.6",
     "next-mdx-remote": "file:vendor/next-mdx-remote",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
