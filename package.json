@@ -12,7 +12,7 @@
     "gray-matter": "file:vendor/gray-matter",
     "lucide-react": "^0.360.0",
     "cmdk": "file:vendor/cmdk",
-    "next": "latest",
+    "next": "15.5.8",
     "next-mdx-remote": "file:vendor/next-mdx-remote",
     "react": "latest",
     "react-dom": "latest"
