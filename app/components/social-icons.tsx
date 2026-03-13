@@ -4,13 +4,21 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Github, Linkedin, Mail, type LucideIcon } from 'lucide-react'
 
+import type { ProfileSocial } from '@/lib/profile'
+
 type SocialLink = {
   href: string
   label: string
   icon: LucideIcon
 }
 
-const socials: SocialLink[] = [
+const iconMap: Record<string, LucideIcon> = {
+  github: Github,
+  linkedin: Linkedin,
+  mail: Mail,
+}
+
+const defaultSocials: SocialLink[] = [
   {
     href: 'https://github.com/abamakbar07',
     label: 'GitHub',
@@ -28,12 +36,33 @@ const socials: SocialLink[] = [
   },
 ]
 
-type SocialIconsProps = {
-  className?: string
+function toSocialLinks(socials?: ProfileSocial[]): SocialLink[] {
+  if (!socials || socials.length === 0) return defaultSocials
+
+  const links = socials
+    .map((social) => {
+      const key = social.icon?.toLowerCase() ?? ''
+      const icon = iconMap[key] ?? Mail
+
+      return {
+        href: social.href,
+        label: social.label,
+        icon,
+      }
+    })
+    .filter((social) => social.href && social.label)
+
+  return links.length > 0 ? links : defaultSocials
 }
 
-export function SocialIcons({ className = '' }: SocialIconsProps): JSX.Element {
+type SocialIconsProps = {
+  className?: string
+  socials?: ProfileSocial[]
+}
+
+export function SocialIcons({ className = '', socials }: SocialIconsProps): JSX.Element {
   const shouldReduceMotion = useReducedMotion()
+  const links = toSocialLinks(socials)
 
   return (
     <motion.ul
@@ -43,7 +72,7 @@ export function SocialIcons({ className = '' }: SocialIconsProps): JSX.Element {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
     >
-      {socials.map((social) => {
+      {links.map((social) => {
         const Icon = social.icon
         return (
           <motion.li key={social.href} whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}>

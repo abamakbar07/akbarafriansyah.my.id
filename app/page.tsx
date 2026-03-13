@@ -1,14 +1,25 @@
+import { getProfile } from '@/lib/profile'
+
 import TypewriterIntro from './(site)/components/typewriter-intro'
 
-export default function Home(): JSX.Element {
+export default async function Home(): Promise<JSX.Element> {
+  const profile = await getProfile()
+
+  const name = profile.name || 'Muhamad Akbar Afriansyah'
+  const headline = profile.headline || 'Warehouse Admin & SAP Specialist'
+  const company = profile.company || 'PT DSV Solutions Indonesia'
+  const location = profile.location || 'Indonesia'
+  const tagline = profile.tagline || 'Automate what feels repetitive. Simplify what feels complex.'
+  const primaryHighlight = profile.highlights[0] || 'Supervisor Development Program cohort 11'
+
   return (
     <section className="space-y-12">
       <TypewriterIntro />
       <div className="space-y-6 text-base text-muted">
         <p className="max-w-narrative font-serif text-lg leading-narrative text-foreground">
-          I’m Muhamad Akbar Afriansyah—Warehouse Admin & SAP Specialist at PT DSV Solutions Indonesia—currently steering
-          Ericsson projects at PDU across the 3PL landscape. My daily craft spans SAP MM/WMS transactions,
-          stock reconciliation rituals, and keeping nationwide Stock Take Operations serene for every site involved.
+          I’m {name}—{headline} at {company}—currently steering Ericsson projects across the 3PL landscape from {location}.
+          My daily craft spans SAP MM/WMS transactions, stock reconciliation rituals, and keeping nationwide Stock Take
+          Operations serene for every site involved.
         </p>
         <p className="max-w-narrative font-serif">
           Years of reconciling MB52 exports with on-floor truth taught me to pair calm leadership with pragmatic tooling. I
@@ -26,9 +37,9 @@ export default function Home(): JSX.Element {
           philosophy, and the principles guiding how an INTP brain keeps operations generous and dependable.
         </p>
         <div className="flex flex-col gap-3 text-sm uppercase tracking-[0.3em] text-muted sm:flex-row sm:items-center">
-          <span className="text-accent-teal">Supervisor Development Program cohort 11</span>
+          <span className="text-accent-teal">{primaryHighlight}</span>
           <span className="hidden h-px flex-1 bg-muted sm:block" aria-hidden="true" />
-          <span className="text-muted">Automate what feels repetitive. Simplify what feels complex.</span>
+          <span className="text-muted">{tagline}</span>
         </div>
       </div>
     </section>
