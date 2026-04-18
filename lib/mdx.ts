@@ -13,6 +13,10 @@ export type ContentMeta = {
   updatedAt?: string;
   tags?: string[];
   status?: string;
+  category?: string;
+  tools?: string[];
+  impact?: string;
+  featured?: boolean;
   readingTime: number;
 };
 
@@ -50,6 +54,16 @@ function normalizeTags(input: unknown): string[] {
   return [];
 }
 
+function normalizeTools(input: unknown): string[] {
+  if (Array.isArray(input)) {
+    return input.map((value) => String(value));
+  }
+  if (typeof input === 'string' && input.length > 0) {
+    return input.split(',').map((value) => value.trim()).filter(Boolean);
+  }
+  return [];
+}
+
 function buildMeta(
   collection: CollectionName,
   slug: string,
@@ -64,6 +78,10 @@ function buildMeta(
     updatedAt: frontmatter.updatedAt ? String(frontmatter.updatedAt) : undefined,
     tags: normalizeTags(frontmatter.tags),
     status: frontmatter.status ? String(frontmatter.status) : undefined,
+    category: frontmatter.category ? String(frontmatter.category) : undefined,
+    tools: normalizeTools(frontmatter.tools),
+    impact: frontmatter.impact ? String(frontmatter.impact) : undefined,
+    featured: Boolean(frontmatter.featured),
     readingTime: estimateReadingTime(body),
   };
 }

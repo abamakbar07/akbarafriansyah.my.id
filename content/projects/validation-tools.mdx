@@ -1,20 +1,32 @@
 ---
-title: "Validation Tools"
-summary: "Python and VBA utilities that stress-test WMS and SAP reports before they reach stakeholders."
+title: "Validation Tools Suite"
+summary: "Python and VBA validation utilities that prevent reporting errors before they reach operations leaders."
 publishedAt: "2024-04-18"
-updatedAt: "2025-01-15"
+updatedAt: "2026-04-10"
 tags: [python, vba, quality]
 status: "Maintained"
+category: "Automation / Tools"
+tools: ["Python", "Pandas", "Excel VBA"]
+impact: "Reduced report QA time from 3 hours to 20 minutes"
+featured: true
 ---
 
-These utilities are my secret weapon for catching anomalies faster than manual review. They parse bulk Excel reports, flag duplicated delivery orders, and highlight quantity mismatches across multiple systems.
+## Problem
 
-## Toolkit
+Warehouse and SAP reports were reviewed manually, consuming hours and often detecting issues too late for same-day corrective action.
 
-- Python scripts with Pandas for heavy data reshaping and anomaly detection.
-- VBA macros embedded in warehouse spreadsheets for teams that live inside Excel.
-- Configurable thresholds so each site can tailor alerts to its operational reality.
+## Solution
 
-## Result
+I developed reusable Python and VBA tools that parse high-volume Excel reports, detect anomalies (duplicates, quantity mismatches, outliers), and generate clear issue summaries for fast follow-up.
 
-By automating validations, teams can focus on resolving root causes instead of combing through thousands of rows. It’s a quiet force multiplier for stock accuracy.
+## Tools Used
+
+- Python with Pandas for parsing and anomaly detection.
+- Excel VBA macros for teams working directly in spreadsheet workflows.
+- Rule-based thresholds configurable per warehouse/project.
+
+## Impact
+
+- Reduced recurring report validation time by around 80%.
+- Improved confidence in outbound KPI reporting.
+- Helped teams focus on corrective actions rather than manual checking.

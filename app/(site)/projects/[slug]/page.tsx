@@ -1,30 +1,31 @@
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import { MetadataBadges } from '../../components/metadata-badges';
-import { LongformLayout } from '../../components/longform-layout';
-import { getAllSlugs, getEntry } from '@/lib/mdx';
-import { getAbsoluteUrl, siteConfig } from '@/lib/site';
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+import { MetadataBadges } from '../../components/metadata-badges'
+import { LongformLayout } from '../../components/longform-layout'
+import { Badge } from '@/app/components/badge'
+import { getAllSlugs, getEntry } from '@/lib/mdx'
+import { getAbsoluteUrl, siteConfig } from '@/lib/site'
 
 export async function generateStaticParams() {
-  const slugs = await getAllSlugs('projects');
-  return slugs.map((slug) => ({ slug }));
+  const slugs = await getAllSlugs('projects')
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const entry = await getEntry('projects', params.slug);
+  const entry = await getEntry('projects', params.slug)
   if (!entry) {
     return {
       title: 'Project not found',
       description: 'The project you were looking for could not be located.',
-    };
+    }
   }
-  const url = getAbsoluteUrl(`/projects/${entry.meta.slug}`);
-  const ogImage = getAbsoluteUrl(
-    `/api/og?title=${encodeURIComponent(entry.meta.title)}&type=${encodeURIComponent('Project')}`
-  );
-  const description = entry.meta.summary ?? siteConfig.description;
+  const url = getAbsoluteUrl(`/projects/${entry.meta.slug}`)
+  const ogImage = getAbsoluteUrl(`/api/og?title=${encodeURIComponent(entry.meta.title)}&type=${encodeURIComponent('Project')}`)
+  const description = entry.meta.summary ?? siteConfig.description
+
   return {
-    title: `${entry.meta.title} — Projects`,
+    title: `${entry.meta.title} — Project Case Study`,
     description,
     alternates: {
       canonical: url,
@@ -39,14 +40,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       modifiedTime: entry.meta.updatedAt ?? entry.meta.publishedAt,
       authors: [siteConfig.author],
       tags: entry.meta.tags,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: entry.meta.title,
-        },
-      ],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: entry.meta.title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -55,13 +49,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       creator: siteConfig.twitter,
       images: [ogImage],
     },
-  };
+  }
 }
 
 export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const entry = await getEntry('projects', params.slug);
+  const entry = await getEntry('projects', params.slug)
   if (!entry) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -70,10 +64,21 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       header={
         <>
           <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.3em] text-[#89a8b2]">Project</p>
-            <h1 className="text-4xl font-semibold text-[#e0dede] md:text-5xl">{entry.meta.title}</h1>
-            {entry.meta.summary ? <p className="max-w-2xl text-lg text-[#bdbbbb]">{entry.meta.summary}</p> : null}
+            <p className="text-sm uppercase tracking-[0.3em] text-accent-teal">Project Case Study</p>
+            <h1 className="text-4xl font-semibold text-foreground md:text-5xl">{entry.meta.title}</h1>
+            {entry.meta.summary ? <p className="max-w-2xl text-lg text-muted">{entry.meta.summary}</p> : null}
           </div>
+
+          <div className="space-y-4">
+            <div className="flex flex-wrap gap-2">
+              {entry.meta.category ? <Badge>{entry.meta.category}</Badge> : null}
+              {entry.meta.tools?.map((tool) => (
+                <Badge key={tool}>{tool}</Badge>
+              ))}
+            </div>
+            {entry.meta.impact ? <Badge tone="metric">Impact: {entry.meta.impact}</Badge> : null}
+          </div>
+
           <MetadataBadges
             publishedAt={entry.meta.publishedAt}
             updatedAt={entry.meta.updatedAt}
@@ -86,5 +91,5 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
     >
       {entry.content}
     </LongformLayout>
-  );
+  )
 }

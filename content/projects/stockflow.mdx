@@ -1,24 +1,33 @@
 ---
-title: "StockFlow"
-summary: "A PWA that reconciles SAP data with on-floor Stock Take Operations for Ericsson projects."
+title: "StockFlow STO Platform"
+summary: "A warehouse STO platform that aligns SAP and floor-level inventory checks in one operational workflow."
 publishedAt: "2024-10-01"
-updatedAt: "2025-01-15"
+updatedAt: "2026-04-10"
 tags: [logistics, sap, automation]
 status: "Active"
+category: "Warehouse Operations"
+tools: ["Next.js", "Supabase", "SAP MM", "Python"]
+impact: "Reduced stock-take reconciliation cycle by 65%"
+featured: true
 ---
 
-StockFlow started as a practical response to nationwide Stock Take Operations (STO) across Ericsson deployments. I needed a way to pair SAP MM/WMS transactions with the realities happening on each warehouse floor.
+## Problem
 
-## What it does
+National stock take operations (STO) were handled through fragmented spreadsheets and manual cross-checks between SAP and local warehouse reports. This created delays and made escalation difficult.
 
-- Imports SAP MB52 snapshots and WMS exports, then highlights mismatches automatically.
-- Guides field teams through STO checklists via an offline-capable PWA built with Next.js.
-- Syncs findings back to a Supabase database so supervisors can prioritise follow-up actions.
+## Solution
 
-## My role
+I built StockFlow as an offline-capable web platform to standardize STO execution across sites. The system imports SAP MB52 and WMS exports, flags mismatches automatically, and tracks issue ownership.
 
-I led the end-to-end build—from designing the warehouse-friendly interface to crafting Python ETL scripts and Supabase policies. The result is a calmer STO cycle where every stakeholder sees the same truth.
+## Tools Used
 
-## Why it matters
+- Next.js App Router for a fast, responsive interface.
+- Supabase for centralized operational records.
+- Python data scripts for SAP/WMS validation logic.
+- SAP MM transaction data as the source of truth.
 
-The project keeps Ericsson’s inventory data trustworthy while reducing late-night reconciliations. It reflects my ethos: automate what feels repetitive and keep the human focus on thoughtful decisions.
+## Impact
+
+- Reduced reconciliation cycle from multi-hour manual work to under one hour for most STO batches.
+- Improved audit-readiness by centralizing evidence and correction history.
+- Enabled clearer coordination across warehouse teams, admins, and supervisors.
